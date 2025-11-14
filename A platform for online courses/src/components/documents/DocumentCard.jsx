@@ -1,14 +1,25 @@
 import { Link } from 'react-router-dom';
 import { Star, User, FileText, BookOpen, ShoppingCart, Heart } from 'lucide-react';
 import { useState } from 'react';
+import { useCart } from '../../context/CartContext';
+import { useToast } from '../../context/ToastContext';
 
 const DocumentCard = ({ document, featured = false, trending = false }) => {
     const [isWishlisted, setIsWishlisted] = useState(false);
+    const { addToCart, isInCart } = useCart();
+    const { success, info } = useToast();
+    const inCart = isInCart(document.id);
 
     const handleAddToCart = (e) => {
         e.preventDefault();
-        // Will be implemented with context
-        console.log('Add to cart:', document.title);
+        if (!inCart) {
+            const result = addToCart(document);
+            if (result.success) {
+                success(`"${document.title}" added to cart!`);
+            } else {
+                info(result.message);
+            }
+        }
     };
 
     const handleWishlist = (e) => {
@@ -17,8 +28,8 @@ const DocumentCard = ({ document, featured = false, trending = false }) => {
     };
 
     return (
-        <Link 
-            to={`/document/${document.slug}`} 
+        <Link
+            to={`/document/${document.slug}`}
             className={`document-card ${featured ? 'document-card-featured' : ''} ${trending ? 'document-card-trending' : ''}`}
         >
             <div className="document-card-image">
@@ -35,7 +46,7 @@ const DocumentCard = ({ document, featured = false, trending = false }) => {
 
             <div className="document-card-content">
                 <h3 className="document-card-title">{document.title}</h3>
-                
+
                 <div className="document-card-author">
                     <User size={14} />
                     <span>{document.author.name}</span>
@@ -75,14 +86,15 @@ const DocumentCard = ({ document, featured = false, trending = false }) => {
                     )}
                 </div>
                 <div className="document-card-action">
-                    <button 
-                        className="btn-add-to-cart"
+                    <button
+                        className={`btn-add-to-cart ${inCart ? 'in-cart' : ''}`}
                         onClick={handleAddToCart}
+                        disabled={inCart}
                     >
                         <ShoppingCart size={16} />
-                        <span>Add</span>
+                        <span>{inCart ? 'In Cart' : 'Add'}</span>
                     </button>
-                    <button 
+                    <button
                         className={`btn-wishlist ${isWishlisted ? 'active' : ''}`}
                         onClick={handleWishlist}
                     >

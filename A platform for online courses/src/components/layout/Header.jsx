@@ -49,12 +49,12 @@ const Header = ({ cartItemCount = 0 }) => {
                             <span className="cart-badge">{cartItemCount}</span>
                         )}
                     </Link>
-                    
-                    <Link to="/dashboard" className="user-menu">
+
+                    <Link to="/login" className="user-menu">
                         <User size={24} />
                     </Link>
 
-                    <button 
+                    <button
                         className="mobile-menu-btn"
                         onClick={() => setIsMenuOpen(!isMenuOpen)}
                     >

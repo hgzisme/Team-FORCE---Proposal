@@ -20,11 +20,12 @@
 @import './styles/components/filter.css';
 @import './styles/components/modal.css';
 @import './styles/components/pagination.css';
+@import './styles/components/toast.css';
 
 /* Page Styles */
-@import './styles/pages/home.css';
-@import './styles/pages/browse.css';
-@import './styles/pages/document-detail.css';
+@import './styles/pages/home-premium.css';
+@import './styles/pages/browse-modern.css';
+@import './styles/pages/document-detail-modern.css';
 @import './styles/pages/cart.css';
 @import './styles/pages/dashboard.css';
 @import './styles/pages/auth.css';
