@@ -1,178 +1,167 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, CheckCircle, Star, TrendingUp, Award, Users } from 'lucide-react';
-import CourseCard from '../components/CourseCard';
-import { coursesData, categories } from '../data/coursesData';
-import '../styles/Home.css';
+import { Search, Briefcase, Scale, TrendingUp, DollarSign, Palette, Code, GraduationCap, Sparkles, ArrowRight, Star } from 'lucide-react';
+import DocumentCard from '../components/documents/DocumentCard';
+import { documents, categories } from '../data/documents';
 
 const Home = () => {
-    const featuredCourses = coursesData.slice(0, 4);
-    const trendingCourses = coursesData.slice(4, 8);
+    const featuredDocuments = documents.filter(doc => doc.isFeatured).slice(0, 3);
+    const trendingDocuments = documents.filter(doc => doc.isTrending).slice(0, 3);
+
+    const categoryIcons = {
+        'business': Briefcase,
+        'legal': Scale,
+        'marketing': TrendingUp,
+        'finance': DollarSign,
+        'design': Palette,
+        'technology': Code,
+        'education': GraduationCap,
+        'creative': Sparkles
+    };
 
     return (
-        <div className="home">
+        <div className="home-page">
             {/* Hero Section */}
-            <section className="hero">
+            <section className="home-hero">
                 <div className="hero-content">
                     <h1 className="hero-title">
-                        Unlock Your Potential with <span className="highlight">Expert-Led Courses</span>
+                        Your Premium Document Marketplace
                     </h1>
                     <p className="hero-subtitle">
-                        Join millions of learners worldwide. Learn new skills, advance your career,
-                        and achieve your goals with our comprehensive online courses.
+                        Discover high-quality templates, guides, and resources from expert creators worldwide.
+                        Start building your business today.
                     </p>
-                    <div className="hero-actions">
-                        <Link to="/courses" className="btn btn-primary">
-                            Explore Courses <ArrowRight size={20} />
-                        </Link>
-                        <Link to="/about" className="btn btn-secondary">
-                            Learn More
-                        </Link>
+                    
+                    <div className="hero-search" style={{ position: 'relative' }}>
+                        <Search className="hero-search-icon" size={24} />
+                        <input
+                            type="text"
+                            className="hero-search-input"
+                            placeholder="Search for documents, templates, guides..."
+                        />
                     </div>
+
                     <div className="hero-stats">
-                        <div className="stat-item">
-                            <Users size={24} />
-                            <div>
-                                <h3>50K+</h3>
-                                <p>Active Students</p>
-                            </div>
+                        <div className="hero-stat">
+                            <span className="hero-stat-value">50K+</span>
+                            <span className="hero-stat-label">Documents</span>
                         </div>
-                        <div className="stat-item">
-                            <Award size={24} />
-                            <div>
-                                <h3>1,000+</h3>
-                                <p>Courses Available</p>
-                            </div>
+                        <div className="hero-stat">
+                            <span className="hero-stat-value">25K+</span>
+                            <span className="hero-stat-label">Creators</span>
                         </div>
-                        <div className="stat-item">
-                            <Star size={24} fill="#fbbf24" color="#fbbf24" />
-                            <div>
-                                <h3>4.8/5</h3>
-                                <p>Average Rating</p>
-                            </div>
+                        <div className="hero-stat">
+                            <span className="hero-stat-value">1M+</span>
+                            <span className="hero-stat-label">Downloads</span>
                         </div>
                     </div>
-                </div>
-                <div className="hero-image">
-                    <img
-                        src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=600&fit=crop"
-                        alt="Students learning online"
-                    />
                 </div>
             </section>
 
             {/* Categories Section */}
-            <section className="categories-section">
-                <div className="section-header">
-                    <h2>Explore Top Categories</h2>
-                    <p>Discover courses across various fields and industries</p>
+            <section className="home-categories">
+                <div className="container">
+                    <div className="section-header">
+                        <h2 className="section-title">Browse by Category</h2>
+                        <p className="section-description">
+                            Find the perfect documents for your needs across our diverse categories
+                        </p>
+                    </div>
+
+                    <div className="categories-grid">
+                        {categories.map(category => {
+                            const Icon = categoryIcons[category.slug] || Briefcase;
+                            return (
+                                <Link
+                                    key={category.id}
+                                    to={`/browse?category=${category.slug}`}
+                                    className="category-card"
+                                >
+                                    <div className="category-icon">
+                                        <Icon size={32} />
+                                    </div>
+                                    <h3 className="category-name">{category.name}</h3>
+                                    <p className="category-count">{category.count} documents</p>
+                                </Link>
+                            );
+                        })}
+                    </div>
                 </div>
-                <div className="categories-grid">
-                    {categories.map((category, index) => (
-                        <Link
-                            key={index}
-                            to={`/courses?category=${category.name.toLowerCase()}`}
-                            className="category-card"
-                        >
-                            <div className="category-icon">
-                                {category.name === 'Web Development' && '💻'}
-                                {category.name === 'Data Science' && '📊'}
-                                {category.name === 'Cloud Computing' && '☁️'}
-                                {category.name === 'Marketing' && '📈'}
-                                {category.name === 'Mobile Development' && '📱'}
-                                {category.name === 'Design' && '🎨'}
-                                {category.name === 'IT & Security' && '🔒'}
-                                {category.name === 'Programming' && '⚡'}
-                            </div>
-                            <h3>{category.name}</h3>
-                            <p>{category.count.toLocaleString()} courses</p>
+            </section>
+
+            {/* Featured Documents */}
+            <section className="home-featured">
+                <div className="container">
+                    <div className="section-header">
+                        <span className="featured-badge">
+                            <Star size={18} fill="currentColor" />
+                            Featured
+                        </span>
+                        <h2 className="section-title">Handpicked for You</h2>
+                        <p className="section-description">
+                            Premium documents curated by our team of experts
+                        </p>
+                    </div>
+
+                    <div className="documents-grid">
+                        {featuredDocuments.map(document => (
+                            <DocumentCard 
+                                key={document.id} 
+                                document={document}
+                                featured={true}
+                            />
+                        ))}
+                    </div>
+
+                    <div style={{ textAlign: 'center', marginTop: 'var(--spacing-12)' }}>
+                        <Link to="/browse" className="btn btn-primary btn-lg">
+                            View All Documents
+                            <ArrowRight size={20} />
                         </Link>
-                    ))}
+                    </div>
                 </div>
             </section>
 
-            {/* Featured Courses */}
-            <section className="courses-section">
-                <div className="section-header">
-                    <h2>Featured Courses</h2>
-                    <p>Hand-picked courses by our expert instructors</p>
-                </div>
-                <div className="courses-grid">
-                    {featuredCourses.map(course => (
-                        <CourseCard key={course.id} course={course} />
-                    ))}
-                </div>
-                <div className="section-footer">
-                    <Link to="/courses" className="btn btn-outline">
-                        View All Courses <ArrowRight size={18} />
-                    </Link>
-                </div>
-            </section>
+            {/* Trending Documents */}
+            <section className="home-featured">
+                <div className="container">
+                    <div className="section-header">
+                        <span className="featured-badge" style={{ background: 'linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%)' }}>
+                            <TrendingUp size={18} />
+                            Trending
+                        </span>
+                        <h2 className="section-title">Most Popular This Week</h2>
+                        <p className="section-description">
+                            Join thousands of users who trust these top-rated documents
+                        </p>
+                    </div>
 
-            {/* Trending Courses */}
-            <section className="courses-section trending">
-                <div className="section-header">
-                    <div className="trending-badge">
-                        <TrendingUp size={24} />
-                        <span>Trending Now</span>
-                    </div>
-                    <h2>Most Popular Courses</h2>
-                    <p>Join thousands of students learning these top-rated courses</p>
-                </div>
-                <div className="courses-grid">
-                    {trendingCourses.map(course => (
-                        <CourseCard key={course.id} course={course} />
-                    ))}
-                </div>
-            </section>
-
-            {/* Why Choose Us */}
-            <section className="features-section">
-                <div className="section-header">
-                    <h2>Why Learn With LearnHub?</h2>
-                    <p>Everything you need to succeed in your learning journey</p>
-                </div>
-                <div className="features-grid">
-                    <div className="feature-card">
-                        <div className="feature-icon">🎓</div>
-                        <h3>Expert Instructors</h3>
-                        <p>Learn from industry professionals with years of real-world experience</p>
-                    </div>
-                    <div className="feature-card">
-                        <div className="feature-icon">⏰</div>
-                        <h3>Learn at Your Pace</h3>
-                        <p>Access courses anytime, anywhere, and learn at your own schedule</p>
-                    </div>
-                    <div className="feature-card">
-                        <div className="feature-icon">📱</div>
-                        <h3>Mobile Friendly</h3>
-                        <p>Learn on the go with our mobile-optimized platform</p>
-                    </div>
-                    <div className="feature-card">
-                        <div className="feature-icon">🏆</div>
-                        <h3>Certificates</h3>
-                        <p>Earn certificates upon completion to showcase your achievements</p>
-                    </div>
-                    <div className="feature-card">
-                        <div className="feature-icon">💬</div>
-                        <h3>Community Support</h3>
-                        <p>Connect with fellow learners and get help when you need it</p>
-                    </div>
-                    <div className="feature-card">
-                        <div className="feature-icon">♾️</div>
-                        <h3>Lifetime Access</h3>
-                        <p>Get unlimited access to course materials even after completion</p>
+                    <div className="documents-grid">
+                        {trendingDocuments.map(document => (
+                            <DocumentCard 
+                                key={document.id} 
+                                document={document}
+                                trending={true}
+                            />
+                        ))}
                     </div>
                 </div>
             </section>
 
             {/* CTA Section */}
-            <section className="cta-section">
+            <section className="home-cta">
                 <div className="cta-content">
-                    <h2>Ready to Start Learning?</h2>
-                    <p>Join over 50,000 students already learning with LearnHub</p>
-                    <Link to="/signup" className="btn btn-cta">
-                        Get Started Today <ArrowRight size={20} />
-                    </Link>
+                    <h2 className="cta-title">Ready to Get Started?</h2>
+                    <p className="cta-description">
+                        Join thousands of professionals who trust DocuVerse for their document needs
+                    </p>
+                    <div className="cta-buttons">
+                        <Link to="/browse" className="btn btn-lg" style={{ background: 'white', color: 'var(--color-primary)' }}>
+                            Browse Documents
+                        </Link>
+                        <Link to="/sell" className="btn btn-secondary btn-lg">
+                            Become a Seller
+                        </Link>
+                    </div>
                 </div>
             </section>
         </div>

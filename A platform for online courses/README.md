@@ -1,30 +1,44 @@
-# LearnHub - Online Course Platform
+# DocuVerse - Document-Based Learning Platform
 
-A comprehensive, fully-functional online course platform built with React, featuring modern UI/UX design and intuitive navigation for customers.
+A revolutionary document-based learning platform built with React and AWS serverless architecture. DocuVerse transforms reading from a passive act into an active, focused journey with integrated Focus Mode, Pomodoro timer, smart note-taking, and seamless Google Calendar integration.
 
 ## 🌟 Features
 
-### User Features
-- **Browse Courses**: Explore thousands of courses across multiple categories
-- **Advanced Search & Filtering**: Find courses by category, level, price, and rating
-- **Course Details**: Comprehensive course information with curriculum, instructor details, and student reviews
-- **Shopping Cart**: Add multiple courses and proceed to checkout
-- **Student Dashboard**: Track learning progress, view enrolled courses, and certificates
-- **User Authentication**: Secure login and signup functionality
+### Core Features
+- **Focus Mode**: Distraction-free reading environment designed for deep concentration
+- **Smart Note-Taking**: Highlight passages and attach notes/to-dos directly to text
+- **Pomodoro Timer**: Integrated timer to structure study sessions effectively
+- **Calendar Integration**: Connect with Google Calendar to schedule learning time
+- **Document Library**: Browse e-books, research papers, and study guides
+- **Advanced Search & Filtering**: Find documents by category, type, author, and topic
+- **Reading Progress Tracking**: Monitor your reading journey and retention
+- **Secure Document Access**: AWS-powered secure document delivery
+- **User Authentication**: AWS Cognito-based secure login and signup
 
 ### Design Features
 - **Responsive Design**: Fully responsive across all devices (mobile, tablet, desktop)
-- **Modern UI/UX**: Clean, professional interface with smooth animations
+- **Modern UI/UX**: Clean, distraction-free interface optimized for reading
 - **Intuitive Navigation**: Easy-to-use navigation with clear visual hierarchy
 - **Accessible**: Built with accessibility best practices
 
 ## 🚀 Technologies Used
 
+### Frontend
 - **React 19** - Modern UI library
 - **React Router** - Client-side routing
 - **Lucide React** - Modern icon system
 - **Vite** - Fast build tool and dev server
 - **CSS3** - Custom styling with modern features
+
+### AWS Serverless Architecture (Planned)
+- **Amazon S3** - Secure document storage
+- **Amazon DynamoDB** - User data, notes, highlights, and tasks
+- **AWS Lambda** - Document processing and secure link generation
+- **Amazon API Gateway** - Backend API management
+- **Amazon Cognito** - User authentication and authorization
+- **AWS WAF + CloudFront** - Global delivery and security
+- **CloudWatch** - Monitoring and logging
+- **AWS Amplify** - Frontend hosting
 
 ## 📦 Quick Start
 
@@ -47,58 +61,70 @@ src/
 ├── components/           # Reusable components
 │   ├── Navbar.jsx       # Navigation bar with search
 │   ├── Footer.jsx       # Site footer
-│   └── CourseCard.jsx   # Course display card
+│   ├── DocumentCard.jsx # Document display card
+│   └── FocusMode.jsx    # Focus Mode reading interface
 ├── pages/               # Page components
 │   ├── Home.jsx         # Landing page
-│   ├── Courses.jsx      # Course catalog with filters
-│   ├── CourseDetail.jsx # Individual course page
+│   ├── Library.jsx      # Document library with filters
+│   ├── DocumentDetail.jsx # Individual document page
+│   ├── DocumentReader.jsx # Document reader with Focus Mode
 │   ├── Login.jsx        # Login page
 │   ├── Signup.jsx       # Registration page
-│   ├── Dashboard.jsx    # Student dashboard
+│   ├── Dashboard.jsx    # User dashboard (My Documents)
 │   └── Cart.jsx         # Shopping cart
 ├── data/                # Mock data
-│   └── coursesData.js   # Course and category data
+│   └── documentsData.js # Document and category data
 └── styles/              # CSS modules
 ```
 
 ## 🎯 Key Features
 
 ### 1. Home Page
-- Hero section with compelling CTA
-- Featured courses showcase
-- Category exploration grid
-- Trending courses section
-- Benefits and features
+- Hero section highlighting Focus Mode and smart learning
+- Featured documents showcase
+- Category exploration grid (E-books, Research Papers, Study Guides)
+- Benefits of active reading and retention
 - Call-to-action section
 
-### 2. Courses Page
-- Advanced filtering (category, level, price)
+### 2. Library Page
+- Advanced filtering (document type, category, topic, author)
 - Real-time search functionality
 - Multiple sorting options
-- Responsive course grid
+- Responsive document grid
 - Mobile-friendly filters
 
-### 3. Course Detail Page
-- Comprehensive course information
-- Video preview capability
-- Detailed curriculum breakdown
-- Instructor profile and stats
-- Student reviews and ratings
+### 3. Document Detail Page
+- Comprehensive document information
+- Preview capability
+- Table of contents
+- Author profile and credentials
+- Reader reviews and ratings
 - Sticky purchase card
 
-### 4. Student Dashboard
-- Progress tracking for enrolled courses
-- Course completion percentages
-- Certificate downloads
-- Learning statistics overview
-- Quick access to continue learning
+### 4. Document Reader (Focus Mode)
+- **Distraction-free reading interface**
+- **Integrated Pomodoro timer** for time management
+- **Highlight and note-taking** directly on text
+- **To-do items linked to passages**
+- **Progress tracking** by page/section
+- **Google Calendar integration** for scheduling
+- Clean typography optimized for reading
+- Adjustable font size and reading preferences
 
-### 5. Shopping Cart
-- Multiple course management
+### 5. User Dashboard (My Documents)
+- Reading progress tracking for purchased documents
+- Reading completion percentages
+- All notes and highlights in one place
+- Active to-do items from reading sessions
+- Reading statistics and time spent
+- Quick access to continue reading
+
+### 6. Shopping Cart
+- Multiple document purchase management
 - Price breakdown with discounts
 - Promo code support
-- Money-back guarantee info
-- Recommended courses section
+- Secure payment info
+- Recommended documents section
 
 ## 🎨 Design Principles
 
@@ -129,6 +155,36 @@ src/
 - Safari (latest)
 - Edge (latest)
 
+## 💡 DocuVerse Philosophy
+
+DocuVerse is built on the belief that reading should be an active, engaging experience—not a passive scroll. Our platform:
+
+1. **Enhances Retention**: Active reading with notes and highlights leads to better memory and understanding
+2. **Respects Focus**: Focus Mode eliminates distractions so you can truly absorb knowledge
+3. **Connects Ideas**: Link your thoughts and tasks directly to the text that inspired them
+4. **Manages Time**: Built-in Pomodoro timer and calendar integration help you build consistent learning habits
+5. **Scales Effortlessly**: Serverless AWS architecture ensures security, speed, and low operational costs
+
+## 🔐 Security & Infrastructure
+
+Built on AWS serverless architecture with:
+- **Least privilege access** - Minimized permissions across all services
+- **Encrypted storage** - All documents securely stored in S3
+- **Temporary access links** - Time-limited document access URLs
+- **MFA support** - Multi-factor authentication via Cognito
+- **WAF protection** - Web Application Firewall against common threats
+- **Automatic backups** - S3 versioning and DynamoDB point-in-time recovery
+
+## 📈 Operational Excellence
+
+- **Monthly costs**: < $100 with pay-per-use pricing
+- **Auto-scaling**: Handles traffic spikes automatically
+- **99.9% uptime**: Built on AWS infrastructure
+- **Global CDN**: Fast document delivery via CloudFront
+- **Monitoring**: Real-time health checks and alerts via CloudWatch
+
 ---
 
-**Built with ❤️ for learners worldwide**
+**Built with ❤️ for focused learners worldwide**
+
+*Transform your reading. Enhance your learning. Welcome to DocuVerse.*
