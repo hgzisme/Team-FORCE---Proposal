@@ -1,0 +1,127 @@
+/* ============================================
+   BROWSE PAGE STYLES
+   ============================================ */
+
+.browse-page {
+    padding: var(--spacing-12) 0;
+}
+
+.browse-header {
+    margin-bottom: var(--spacing-8);
+}
+
+.browse-title {
+    font-size: var(--text-4xl);
+    font-weight: var(--font-bold);
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-2);
+}
+
+.browse-subtitle {
+    font-size: var(--text-lg);
+    color: var(--text-secondary);
+}
+
+.browse-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-6);
+    padding: var(--spacing-4);
+    background: white;
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-base);
+}
+
+.browse-results-count {
+    font-size: var(--text-base);
+    color: var(--text-secondary);
+}
+
+.browse-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-4);
+}
+
+.sort-dropdown {
+    padding: var(--spacing-2) var(--spacing-4);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    background: white;
+    font-size: var(--text-base);
+    cursor: pointer;
+}
+
+.view-toggle {
+    display: flex;
+    gap: var(--spacing-2);
+}
+
+.view-btn {
+    padding: var(--spacing-2);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
+    background: white;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.view-btn.active {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: white;
+}
+
+.browse-content {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: var(--spacing-8);
+}
+
+.browse-main {
+    min-width: 0;
+}
+
+.documents-list-view {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-6);
+}
+
+.empty-state {
+    text-align: center;
+    padding: var(--spacing-24) var(--spacing-6);
+}
+
+.empty-icon {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto var(--spacing-6);
+    color: var(--text-tertiary);
+}
+
+.empty-title {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-semibold);
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-3);
+}
+
+.empty-description {
+    font-size: var(--text-base);
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-6);
+}
+
+@media (max-width: 1024px) {
+    .browse-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .browse-toolbar {
+        flex-direction: column;
+        gap: var(--spacing-4);
+        align-items: stretch;
+    }
+}
